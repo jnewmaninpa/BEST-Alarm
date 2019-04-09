@@ -143,6 +143,24 @@
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\house.jpg.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\house.jpg.imageset\house.jpg" />
+    <ImageAsset Include="Assets.xcassets\plate.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\plate.png.imageset\plate.png" />
+    <ImageAsset Include="Assets.xcassets\bed.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\bed.png.imageset\bed.png" />
+    <ImageAsset Include="Assets.xcassets\shirt.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\shirt.png.imageset\shirt.png" />
+    <ImageAsset Include="Assets.xcassets\snitch.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\snitch.png.imageset\snitch.png" />
+    <ImageAsset Include="Assets.xcassets\cloud.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\cloud.png.imageset\cloud.png" />
+    <ImageAsset Include="Assets.xcassets\sleep.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\sleep.png.imageset\sleep.png" />
+    <ImageAsset Include="Assets.xcassets\car.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\car.png.imageset\car.png" />
+    <ImageAsset Include="Assets.xcassets\wrench.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\wrench.png.imageset\wrench.png" />
+    <ImageAsset Include="Assets.xcassets\toothbrush.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\toothbrush.png.imageset\toothbrush.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -162,5 +180,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\house.jpg.imageset\" />
+    <Folder Include="Assets.xcassets\plate.png.imageset\" />
+    <Folder Include="Assets.xcassets\bed.png.imageset\" />
+    <Folder Include="Assets.xcassets\shirt.png.imageset\" />
+    <Folder Include="Assets.xcassets\snitch.png.imageset\" />
+    <Folder Include="Assets.xcassets\cloud.png.imageset\" />
+    <Folder Include="Assets.xcassets\sleep.png.imageset\" />
+    <Folder Include="Assets.xcassets\car.png.imageset\" />
+    <Folder Include="Assets.xcassets\wrench.png.imageset\" />
+    <Folder Include="Assets.xcassets\toothbrush.png.imageset\" />
   </ItemGroup>
 </Project>

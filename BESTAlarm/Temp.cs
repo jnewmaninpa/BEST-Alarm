@@ -2,20 +2,21 @@
 using System.ComponentModel;
 using Xamarin.Forms;
 
+using Xamarin.Forms;
+
 namespace BESTAlarm
 {
-    public class SetAlarmPage : ContentPage
+    public class Temp : ContentPage
     {
-
         String imageName;
         TimeSpan customTime;
         TimePicker MyTimePicker;
         Label alarmOnOffLabel;
-        
-        public SetAlarmPage(String newImageName, TimeSpan newCustomTime)
+
+        public Temp(String newImageName, TimeSpan newCustomTime)
         {
             Title = "Set Alarm";
-            BackgroundColor = Color.FromHex("80ccff");
+            BackgroundColor = Color.DarkGreen;
 
             imageName = newImageName;
             customTime = newCustomTime;
@@ -57,7 +58,7 @@ namespace BESTAlarm
             {
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                OnColor = Color.DarkGreen
+                IsToggled = true
             };
             switcher.Toggled += Switcher_Toggled;
 
@@ -90,12 +91,12 @@ namespace BESTAlarm
             if (e.Value) // Switch is now on
             {
                 alarmOnOffLabel.Text = "The alarm is now on";
-                alarmOnOffLabel.TextColor = Color.DarkGreen;
+                BackgroundColor = Color.DarkGreen;
             }
             else // Switch is now off
             {
                 alarmOnOffLabel.Text = "The alarm is now off";
-                alarmOnOffLabel.TextColor = Color.Red;
+                BackgroundColor = Color.Red;
             }
         }
 
@@ -107,6 +108,6 @@ namespace BESTAlarm
 
             }
         }
-
     }
 }
+

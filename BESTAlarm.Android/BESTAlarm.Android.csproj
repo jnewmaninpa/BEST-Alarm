@@ -83,6 +83,15 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\drawable\house.jpg" />
+    <AndroidResource Include="Resources\drawable\toothbrush.png" />
+    <AndroidResource Include="Resources\drawable\wrench.png" />
+    <AndroidResource Include="Resources\drawable\car.png" />
+    <AndroidResource Include="Resources\drawable\sleep.png" />
+    <AndroidResource Include="Resources\drawable\cloud.png" />
+    <AndroidResource Include="Resources\drawable\snitch.png" />
+    <AndroidResource Include="Resources\drawable\bed.png" />
+    <AndroidResource Include="Resources\drawable\shirt.png" />
+    <AndroidResource Include="Resources\drawable\plate.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

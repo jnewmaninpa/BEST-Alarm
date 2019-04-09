@@ -11,13 +11,14 @@ namespace BESTAlarm
             Title = "Set Timer";
 
             Grid grid = new Grid();
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
             TimePicker MyTimePicker = new TimePicker
             {
                 Time = customTime,
-                FontSize = 30,
+                FontSize = 50,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
             };
@@ -30,8 +31,8 @@ namespace BESTAlarm
                 VerticalOptions = LayoutOptions.Center
             };
 
-            grid.Children.Add(MyTimePicker, 0, 0);
-            grid.Children.Add(myLabel, 0, 1);
+            grid.Children.Add(MyTimePicker, 0, 1);
+            grid.Children.Add(myLabel, 0, 0);
 
 
             Content = new StackLayout
