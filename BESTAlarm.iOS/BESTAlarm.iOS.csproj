@@ -96,6 +96,8 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetAlarmNotification_iOS.cs" />
+    <Compile Include="UserNotificationCenterDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -141,8 +143,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\house.jpg.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\house.jpg.imageset\house.jpg" />
     <ImageAsset Include="Assets.xcassets\plate.png.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\plate.png.imageset\plate.png" />
     <ImageAsset Include="Assets.xcassets\bed.png.imageset\Contents.json" />
@@ -189,5 +189,9 @@
     <Folder Include="Assets.xcassets\car.png.imageset\" />
     <Folder Include="Assets.xcassets\wrench.png.imageset\" />
     <Folder Include="Assets.xcassets\toothbrush.png.imageset\" />
+    <Folder Include="Resources\Sounds\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sounds\service-bell_daniel_simion.mp3" />
   </ItemGroup>
 </Project>

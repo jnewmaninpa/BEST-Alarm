@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using UserNotifications;
 
 namespace BESTAlarm.iOS
 {
@@ -24,6 +25,14 @@ namespace BESTAlarm.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            // Request notification permissions from the user
+            UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Sound, (approved, err) => {
+                // Handle approval
+            });
+
+            // Watch for notifications while the app is active
+            UNUserNotificationCenter.Current.Delegate = new UserNotificationCenterDelegate();
 
             return base.FinishedLaunching(app, options);
         }

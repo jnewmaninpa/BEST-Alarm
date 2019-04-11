@@ -4,43 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.IO;
 
 namespace BESTAlarm
 {
     public partial class MainPage : ContentPage
     {
-
         AlarmInfo myAlarms = new AlarmInfo();
+
+        ImageButton alarmButton1;
+        ImageButton alarmButton2;
+        ImageButton alarmButton3;
+        ImageButton alarmButton4;
+        ImageButton alarmButton5;
+        ImageButton alarmButton6;
+        ImageButton alarmButton7;
+        ImageButton alarmButton8;
+        ImageButton alarmButton9;
 
         public MainPage()
         {
             InitializeComponent();
 
-            myAlarms.SetAlarmButtonImageFileName(new String[9]);
-            myAlarms.SetAlarmButtonTime(new TimeSpan[9]);
-
-            myAlarms.SetAlarmButtonImageFileName("toothbrush.png", 0);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(7, 0, 0), 0);
-
-            myAlarms.SetAlarmButtonImageFileName("shirt.png", 1);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(7, 5, 0), 1);
-            myAlarms.SetAlarmButtonImageFileName("bed.png", 2);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(21, 30, 0), 2);
-            myAlarms.SetAlarmButtonImageFileName("snitch.png", 3);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(16, 0, 0), 3);
-            myAlarms.SetAlarmButtonImageFileName("cloud.png", 4);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(7, 45, 0), 4);
-            myAlarms.SetAlarmButtonImageFileName("wrench.png", 5);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(13, 0, 0), 5);
-            myAlarms.SetAlarmButtonImageFileName("plate.png", 6);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(12, 0, 0), 6);
-            myAlarms.SetAlarmButtonImageFileName("sleep.png", 7);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(17, 0, 0), 7);
-            myAlarms.SetAlarmButtonImageFileName("car.png", 8);
-            myAlarms.SetAlarmButtonTime(new TimeSpan(15, 30, 0), 8);
-
-
-            Title = "Main Page";
+            Title = "BEST Alarm";
 
             Grid grid = new Grid();
 
@@ -76,40 +62,39 @@ namespace BESTAlarm
 
 
             // Alarm section buttons
-            ImageButton alarmButton1 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[0]);
+            alarmButton1 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[0]);
             alarmButton1.Clicked += AlarmButton1_Clicked;
             grid.Children.Add(alarmButton1, 0, 1);
 
-
-            ImageButton alarmButton2 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[1]);
+            alarmButton2 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[1]);
             alarmButton2.Clicked += AlarmButton2_Clicked;
             grid.Children.Add(alarmButton2, 1, 1);
 
-            ImageButton alarmButton3 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[2]);
+            alarmButton3 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[2]);
             alarmButton3.Clicked += AlarmButton3_Clicked;
             grid.Children.Add(alarmButton3, 2, 1);
 
-            ImageButton alarmButton4 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[3]);
+            alarmButton4 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[3]);
             alarmButton4.Clicked += AlarmButton4_Clicked;
             grid.Children.Add(alarmButton4, 0, 2);
 
-            ImageButton alarmButton5 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[4]);
+            alarmButton5 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[4]);
             alarmButton5.Clicked += AlarmButton5_Clicked;
             grid.Children.Add(alarmButton5, 1, 2);
 
-            ImageButton alarmButton6 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[5]);
+            alarmButton6 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[5]);
             alarmButton6.Clicked += AlarmButton6_Clicked;
             grid.Children.Add(alarmButton6, 2, 2);
 
-            ImageButton alarmButton7 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[6]);
+            alarmButton7 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[6]);
             alarmButton7.Clicked += AlarmButton7_Clicked;
             grid.Children.Add(alarmButton7, 0, 3);
 
-            ImageButton alarmButton8 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[7]);
+            alarmButton8 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[7]);
             alarmButton8.Clicked += AlarmButton8_Clicked;
             grid.Children.Add(alarmButton8, 1, 3);
 
-            ImageButton alarmButton9 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[8]);
+            alarmButton9 = MakeImageButton(myAlarms.GetAlarmButtonImageFileName()[8]);
             alarmButton9.Clicked += AlarmButton9_Clicked;
             grid.Children.Add(alarmButton9, 2, 3);
 
@@ -165,9 +150,50 @@ namespace BESTAlarm
             };
         }
 
+        override protected void OnAppearing()
+        {
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tempFile");
+
+            if (File.Exists(fileName))
+            {
+                string temp = File.ReadAllText(fileName);
+                Console.WriteLine(temp);
+
+                myAlarms = new AlarmInfo(fileName);
+
+                // If the alarm is on set the background color to green
+                // Otherwise the color is clear
+                alarmButton1.BackgroundColor = myAlarms.isAlarmButtonOn(0) ? Color.DarkGreen : Color.Transparent;
+                alarmButton2.BackgroundColor = myAlarms.isAlarmButtonOn(1) ? Color.DarkGreen : Color.Transparent;
+                alarmButton3.BackgroundColor = myAlarms.isAlarmButtonOn(2) ? Color.DarkGreen : Color.Transparent;
+                alarmButton4.BackgroundColor = myAlarms.isAlarmButtonOn(3) ? Color.DarkGreen : Color.Transparent;
+                alarmButton5.BackgroundColor = myAlarms.isAlarmButtonOn(4) ? Color.DarkGreen : Color.Transparent;
+                alarmButton6.BackgroundColor = myAlarms.isAlarmButtonOn(5) ? Color.DarkGreen : Color.Transparent;
+                alarmButton7.BackgroundColor = myAlarms.isAlarmButtonOn(6) ? Color.DarkGreen : Color.Transparent;
+                alarmButton8.BackgroundColor = myAlarms.isAlarmButtonOn(7) ? Color.DarkGreen : Color.Transparent;
+                alarmButton9.BackgroundColor = myAlarms.isAlarmButtonOn(8) ? Color.DarkGreen : Color.Transparent;
+
+                // Make sure the correct images are shown
+                alarmButton1.Source = myAlarms.GetAlarmButtonImageFileName()[0];
+                alarmButton2.Source = myAlarms.GetAlarmButtonImageFileName()[1];
+                alarmButton3.Source = myAlarms.GetAlarmButtonImageFileName()[2];
+                alarmButton4.Source = myAlarms.GetAlarmButtonImageFileName()[3];
+                alarmButton5.Source = myAlarms.GetAlarmButtonImageFileName()[4];
+                alarmButton6.Source = myAlarms.GetAlarmButtonImageFileName()[5];
+                alarmButton7.Source = myAlarms.GetAlarmButtonImageFileName()[6];
+                alarmButton8.Source = myAlarms.GetAlarmButtonImageFileName()[7];
+                alarmButton9.Source = myAlarms.GetAlarmButtonImageFileName()[8];
+            }
+            else
+            {
+                myAlarms = new AlarmInfo();
+            }
+        }
+
         private void TimerButton6_Clicked(object sender, EventArgs e)
         {
-            myAlarms.SaveToFile();
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tempFile");
+            myAlarms.SaveToFile(fileName);
 
             Temp newPage = new Temp(myAlarms.GetAlarmButtonImageFileName()[4], myAlarms.GetAlarmButtonTime()[4])
             {
@@ -179,12 +205,10 @@ namespace BESTAlarm
 
         private void AlarmButton_Clicked(int index)
         {
-            myAlarms.SaveToFile();
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tempFile");
+            myAlarms.SaveToFile(fileName);
 
-            SetAlarmPage newPage = new SetAlarmPage(myAlarms.GetAlarmButtonImageFileName()[index], myAlarms.GetAlarmButtonTime()[index])
-            {
-                BindingContext = myAlarms
-            };
+            SetAlarmPage newPage = new SetAlarmPage(index);
 
             Navigation.PushAsync(newPage);
         }
@@ -193,42 +217,34 @@ namespace BESTAlarm
         {
             AlarmButton_Clicked(0);
         }
-
         private void AlarmButton2_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(1);
         }
-
         private void AlarmButton3_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(2);
         }
-
         private void AlarmButton4_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(3);
         }
-
         private void AlarmButton5_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(4);
         }
-
         private void AlarmButton6_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(5);
         }
-
         private void AlarmButton7_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(6);
         }
-
         private void AlarmButton8_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(7);
         }
-
         private void AlarmButton9_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(8);
