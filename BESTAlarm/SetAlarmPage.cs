@@ -25,11 +25,11 @@ namespace BESTAlarm
 
         public SetAlarmPage(int index)
         {
-            Title = "Set Alarm";
-
             thisIndex = index;
 
-            BackgroundColor = Color.FromHex("80ccff");
+            Title = "Set Alarm";
+
+            BackgroundColor = myAlarms.isAlarmButtonOn(thisIndex) ? Color.DarkGreen : Color.Red;
 
             MyTimePicker = new TimePicker
             {
@@ -40,6 +40,7 @@ namespace BESTAlarm
                 BackgroundColor = Color.White
             };
             MyTimePicker.PropertyChanged += MyTimePicker_PropertyChanged;
+            MyTimePicker.IsEnabled = !myAlarms.isAlarmButtonOn(thisIndex);
 
             Label myLabel = new Label
             {
@@ -53,39 +54,42 @@ namespace BESTAlarm
             {
                 Source = myAlarms.GetAlarmButtonImageFileName()[thisIndex],
                 HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                BackgroundColor = Color.FromHex("80ccff")
             };
             myImage.Clicked += MyImage_Clicked;
+            myImage.IsEnabled = !myAlarms.isAlarmButtonOn(thisIndex);
 
             Switch switcher = new Switch
             {
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                OnColor = Color.DarkGreen,
+                OnColor = Color.LightGreen,
                 IsToggled = myAlarms.isAlarmButtonOn(index)
             };
             switcher.Toggled += Switcher_Toggled;
 
             alarmOnOffLabel = new Label
             {
-                Text = "The alarm is off",
                 FontSize = 30,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
             };
+            alarmOnOffLabel.Text = myAlarms.isAlarmButtonOn(thisIndex) ? "The alarm is now on" : "The alarm is now off";
 
             Grid grid = new Grid();
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(10) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            grid.Children.Add(myImage, 0, 0);
-            grid.Children.Add(myLabel, 0, 1);
-            grid.Children.Add(MyTimePicker, 0, 2);
-            grid.Children.Add(switcher, 0, 3);
-            grid.Children.Add(alarmOnOffLabel, 0, 4);
+            grid.Children.Add(myImage, 0, 1);
+            grid.Children.Add(myLabel, 0, 2);
+            grid.Children.Add(MyTimePicker, 0, 3);
+            grid.Children.Add(switcher, 0, 4);
+            grid.Children.Add(alarmOnOffLabel, 0, 5);
 
             Content = new StackLayout
             {
@@ -135,7 +139,10 @@ namespace BESTAlarm
                 myAlarms.SaveToFile(fileName);
 
                 alarmOnOffLabel.Text = "The alarm is now on";
-                alarmOnOffLabel.TextColor = Color.DarkGreen;
+
+                BackgroundColor = Color.DarkGreen;
+                myImage.IsEnabled = false;
+                MyTimePicker.IsEnabled = false;
 
                 DependencyService.Get<ISetAlarmNotification>().SetAlarm("test notification", myAlarms.GetAlarmButtonTime()[thisIndex].Hours,
                     myAlarms.GetAlarmButtonTime()[thisIndex].Minutes, myAlarms.GetAlarmButtonTime()[thisIndex].Seconds, myAlarms.getAlarmButtonID(thisIndex));
@@ -145,8 +152,12 @@ namespace BESTAlarm
                 myAlarms.setAlarmButtonOnOff(false, thisIndex);
                 string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tempFile");
                 myAlarms.SaveToFile(fileName);
+
                 alarmOnOffLabel.Text = "The alarm is now off";
-                alarmOnOffLabel.TextColor = Color.Red;
+
+                BackgroundColor = Color.Red;
+                myImage.IsEnabled = true;
+                MyTimePicker.IsEnabled = true;
 
                 DependencyService.Get<ISetAlarmNotification>().CancelAlarm(myAlarms.getAlarmButtonID(thisIndex));
             }

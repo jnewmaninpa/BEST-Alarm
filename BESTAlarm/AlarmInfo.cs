@@ -41,18 +41,6 @@ namespace BESTAlarm
                 alarmButtonIsOn[i] = Boolean.Parse(info[4]);
                 alarmButtonID[i] = info[5];
             }
-
-            //Console.WriteLine("This data was just read in");
-            //string data = "";
-            //for (int i = 0; i < 9; i++)
-            //{
-            //    data += (alarmButtonImageFileName[i] + ",");
-            //    data += (alarmButtonTime[i].Hours + ",");
-            //    data += (alarmButtonTime[i].Minutes + ",");
-            //    data += (alarmButtonTime[i].Seconds + ",");
-            //    data += (alarmButtonIsOn[i] + "\n");
-            //}
-            //Console.WriteLine(data);
         }
 
         public String[] GetAlarmButtonImageFileName()
@@ -123,9 +111,6 @@ namespace BESTAlarm
                 data += (alarmButtonIsOn[i] + ",");
                 data += (alarmButtonID[i] + '\n');
             }
-
-            //Console.WriteLine("We are saving this data");
-            //Console.WriteLine(data);
 
             File.WriteAllText(fileName, data);
         }

@@ -12,11 +12,6 @@ namespace UsingDependencyService.iOS
 {
     public class SetAlarmNotification_iOS : ISetAlarmNotification
     {
-        public SetAlarmNotification_iOS()
-        {
-
-        }
-
         public void CancelAlarm(string id)
         {
             var requests = new string[] { id };
@@ -25,10 +20,6 @@ namespace UsingDependencyService.iOS
 
         public void SetAlarm(String name, int hours, int minutes, int seconds, string id)
         {
-            NSUrl url = NSUrl.FromFilename("Sounds/service-bell_daniel_simion.mp3");
-            SystemSound ss = new SystemSound(url);
-            //ss.PlayAlertSound();
-
             UNMutableNotificationContent content = new UNMutableNotificationContent
             {
                 Title = "New Test Notification Title",
@@ -45,7 +36,6 @@ namespace UsingDependencyService.iOS
             };
 
             UNCalendarNotificationTrigger trigger = UNCalendarNotificationTrigger.CreateTrigger(date, true);
-            //UNTimeIntervalNotificationTrigger trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(5, false);
 
             string requestID = id;
             UNNotificationRequest request = UNNotificationRequest.FromIdentifier(requestID, content, trigger);

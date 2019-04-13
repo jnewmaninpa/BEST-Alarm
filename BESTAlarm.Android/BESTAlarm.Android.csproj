@@ -92,6 +92,33 @@
     <AndroidResource Include="Resources\drawable\bed.png" />
     <AndroidResource Include="Resources\drawable\shirt.png" />
     <AndroidResource Include="Resources\drawable\plate.png" />
+    <AndroidResource Include="Resources\drawable\watermelon.png" />
+    <AndroidResource Include="Resources\drawable\kite.png" />
+    <AndroidResource Include="Resources\drawable\cookiemonster.png" />
+    <AndroidResource Include="Resources\drawable\tree.png" />
+    <AndroidResource Include="Resources\drawable\cheese.png" />
+    <AndroidResource Include="Resources\drawable\water.png" />
+    <AndroidResource Include="Resources\drawable\bath.png" />
+    <AndroidResource Include="Resources\drawable\ghost.png" />
+    <AndroidResource Include="Resources\drawable\ball.png" />
+    <AndroidResource Include="Resources\drawable\bat.png" />
+    <AndroidResource Include="Resources\drawable\clock.png" />
+    <AndroidResource Include="Resources\drawable\purplemonster.png" />
+    <AndroidResource Include="Resources\drawable\leaf.png" />
+    <AndroidResource Include="Resources\drawable\run.png" />
+    <AndroidResource Include="Resources\drawable\plane.png" />
+    <AndroidResource Include="Resources\drawable\snow.png" />
+    <AndroidResource Include="Resources\drawable\plant.png" />
+    <AndroidResource Include="Resources\drawable\hp.png" />
+    <AndroidResource Include="Resources\drawable\monster.png" />
+    <AndroidResource Include="Resources\drawable\work.png" />
+    <AndroidResource Include="Resources\drawable\house.png" />
+    <AndroidResource Include="Resources\drawable\redeyes.png" />
+    <AndroidResource Include="Resources\drawable\harrypotter.png" />
+    <AndroidResource Include="Resources\drawable\pumpkin.png" />
+    <AndroidResource Include="Resources\drawable\sun.png" />
+    <AndroidResource Include="Resources\drawable\bedsleep.png" />
+    <AndroidResource Include="Resources\drawable\dog.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
