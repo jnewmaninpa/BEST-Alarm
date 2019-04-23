@@ -7,37 +7,26 @@ using UserNotifications;
 using UsingDependencyService.iOS;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(SetAlarmNotification_iOS))]
+[assembly: Dependency(typeof(SetTimerNotification_iOS))]
 namespace UsingDependencyService.iOS
 {
-    public class SetAlarmNotification_iOS : ISetAlarmNotification
+    public class SetTimerNotification_iOS : ISetTimerNotification
     {
-        public void CancelAlarm(string id)
-        {
-            var requests = new string[] { id };
-            UNUserNotificationCenter.Current.RemovePendingNotificationRequests(requests);
-        }
 
-        public void SetAlarm(String name, int hours, int minutes, int seconds, string id)
+        public void SetTimer(String name, double timeInSeconds)
         {
             UNMutableNotificationContent content = new UNMutableNotificationContent
             {
-                Title = "BEST Alarm - Alarm",
+                Title = "BEST Alarm - Timer",
                 //Subtitle = "Notification Subtitle",
                 Body = name,
                 Badge = 1,
                 Sound = UNNotificationSound.GetSound("Sounds/service-bell_daniel_simion.mp3")
             };
 
-            NSDateComponents date = new NSDateComponents
-            {
-                Hour = hours,
-                Minute = minutes
-            };
+            UNTimeIntervalNotificationTrigger trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(timeInSeconds, false);
 
-            UNCalendarNotificationTrigger trigger = UNCalendarNotificationTrigger.CreateTrigger(date, true);
-
-            string requestID = id;
+            string requestID = name;
             UNNotificationRequest request = UNNotificationRequest.FromIdentifier(requestID, content, trigger);
 
             // Get current notification settings

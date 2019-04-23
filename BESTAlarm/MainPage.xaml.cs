@@ -8,6 +8,11 @@ using System.IO;
 
 namespace BESTAlarm
 {
+    public interface ISetTimerNotification
+    {
+        void SetTimer(String name, double timeInSeconds);
+    }
+
     public partial class MainPage : ContentPage
     {
         AlarmInfo myAlarms = new AlarmInfo();
@@ -22,12 +27,12 @@ namespace BESTAlarm
         ImageButton alarmButton8;
         ImageButton alarmButton9;
 
-        ImageButton timerButton1;
-        ImageButton timerButton2;
-        ImageButton timerButton3;
-        ImageButton timerButton4;
-        ImageButton timerButton5;
-        ImageButton timerButton6;
+        Button timerButton1;
+        Button timerButton2;
+        Button timerButton3;
+        Button timerButton4;
+        Button timerButton5;
+        Button timerButton6;
 
         public MainPage()
         {
@@ -79,24 +84,71 @@ namespace BESTAlarm
             };
 
             // Timer section buttons
-            timerButton1 = MakeImageButton("cloud.png");
-            timerButton1.Clicked += TimerButton_Clicked;
-            timerButton2 = MakeImageButton("cloud.png");
-            timerButton2.Clicked += TimerButton_Clicked;
-            timerButton3 = MakeImageButton("cloud.png");
-            timerButton3.Clicked += TimerButton_Clicked;
-            timerButton4 = MakeImageButton("cloud.png");
-            timerButton4.Clicked += TimerButton_Clicked;
-            timerButton5 = MakeImageButton("cloud.png");
-            timerButton5.Clicked += TimerButton_Clicked;
-            timerButton6 = MakeImageButton("cloud.png");
-            timerButton6.Clicked += TimerButton_Clicked;
+            timerButton1 = new Button
+            {
+                Text = " 5 Minutes ",
+                TextColor = Color.Black,
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                BorderColor = Color.White,
+                BorderWidth = 1
+            }; timerButton1.Clicked += TimerButton1_Clicked;
+            timerButton2 = new Button
+            {
+                Text = " 10 Minutes ",
+                TextColor = Color.Black,
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                BorderColor = Color.White,
+                BorderWidth = 1
+            }; timerButton2.Clicked += TimerButton2_Clicked;
+            timerButton3 = new Button
+            {
+                Text = " 15 Minutes ",
+                TextColor = Color.Black,
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                BorderColor = Color.White,
+                BorderWidth = 1
+            }; timerButton3.Clicked += TimerButton3_Clicked;
+            timerButton4 = new Button
+            {
+                Text = "30 Minutes",
+                TextColor = Color.Black,
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                BorderColor = Color.White,
+                BorderWidth = 1
+            }; timerButton4.Clicked += TimerButton4_Clicked;
+            timerButton5 = new Button
+            {
+                Text = "     1 Hour     ",
+                TextColor = Color.Black,
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                BorderColor = Color.White,
+                BorderWidth = 1
+            }; timerButton5.Clicked += TimerButton5_Clicked;
+            timerButton6 = new Button
+            {
+                Text = "     2 Hours     ",
+                TextColor = Color.Black,
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                BorderColor = Color.White,
+                BorderWidth = 1
+            }; timerButton6.Clicked += TimerButton6_Clicked;
 
             Title = "BEST Alarm";
 
             Grid grid = new Grid();
 
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(10) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
@@ -108,29 +160,29 @@ namespace BESTAlarm
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            grid.Children.Add(AlarmTitle, 0, 1);
+            grid.Children.Add(AlarmTitle, 0, 0);
             Grid.SetColumnSpan(AlarmTitle, 3);
 
-            grid.Children.Add(alarmButton1, 0, 2);
-            grid.Children.Add(alarmButton2, 1, 2);
-            grid.Children.Add(alarmButton3, 2, 2);
-            grid.Children.Add(alarmButton4, 0, 3);
-            grid.Children.Add(alarmButton5, 1, 3);
-            grid.Children.Add(alarmButton6, 2, 3);
-            grid.Children.Add(alarmButton7, 0, 4);
-            grid.Children.Add(alarmButton8, 1, 4);
-            grid.Children.Add(alarmButton9, 2, 4);
+            grid.Children.Add(alarmButton1, 0, 1);
+            grid.Children.Add(alarmButton2, 1, 1);
+            grid.Children.Add(alarmButton3, 2, 1);
+            grid.Children.Add(alarmButton4, 0, 2);
+            grid.Children.Add(alarmButton5, 1, 2);
+            grid.Children.Add(alarmButton6, 2, 2);
+            grid.Children.Add(alarmButton7, 0, 3);
+            grid.Children.Add(alarmButton8, 1, 3);
+            grid.Children.Add(alarmButton9, 2, 3);
 
-            grid.Children.Add(TimerTitle, 0, 5);
+            grid.Children.Add(TimerTitle, 0, 4);
             Grid.SetColumnSpan(TimerTitle, 3);
 
 
-            grid.Children.Add(timerButton1, 0, 6);
-            grid.Children.Add(timerButton2, 1, 6);
-            grid.Children.Add(timerButton3, 2, 6);
-            grid.Children.Add(timerButton4, 0, 7);
-            grid.Children.Add(timerButton5, 1, 7);
-            grid.Children.Add(timerButton6, 2, 7);
+            grid.Children.Add(timerButton1, 0, 5);
+            grid.Children.Add(timerButton2, 1, 5);
+            grid.Children.Add(timerButton3, 2, 5);
+            grid.Children.Add(timerButton4, 0, 6);
+            grid.Children.Add(timerButton5, 1, 6);
+            grid.Children.Add(timerButton6, 2, 6);
 
             Content = new StackLayout
             {
@@ -140,6 +192,36 @@ namespace BESTAlarm
                 }
 
             };
+        }
+
+        private void TimerButton6_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<ISetTimerNotification>().SetTimer("2 Hour Timer", 60 * 60 * 2);
+        }
+
+        private void TimerButton5_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<ISetTimerNotification>().SetTimer("1 Hour Timer", 60 * 60);
+        }
+
+        private void TimerButton4_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<ISetTimerNotification>().SetTimer("30 Minute Timer", 60 * 30);
+        }
+
+        private void TimerButton3_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<ISetTimerNotification>().SetTimer("15 Minute Timer", 60 * 15);
+        }
+
+        private void TimerButton2_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<ISetTimerNotification>().SetTimer("10 Minute Timer", 60 * 10);
+        }
+
+        private void TimerButton1_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<ISetTimerNotification>().SetTimer("5 Minute Timer", 60 * 5);
         }
 
         override protected void OnAppearing()
@@ -227,11 +309,6 @@ namespace BESTAlarm
         private void AlarmButton9_Clicked(object sender, EventArgs e)
         {
             AlarmButton_Clicked(8);
-        }
-
-        void TimerButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new SetTimerPage(new TimeSpan(17, 0, 0)));
         }
 
         ImageButton MakeImageButton(String imageName)

@@ -13,10 +13,10 @@ namespace BESTAlarm
             "bed.png", "car.png", "plate.png",
             "shirt.png", "sleep.png", "snitch.png",
             "toothbrush.png", "wrench.png", "cloud.png",
-            "cloud.png", "cloud.png", "cloud.png",
-            "cloud.png", "cloud.png", "cloud.png",
-            "cloud.png", "cloud.png", "cloud.png",
-            "cloud.png", "cloud.png", "cloud.png"
+            "ball.png", "bat.png", "bath.png",
+            "bedsleeping.png", "cookiemonster.png", "harrypotter.png",
+            "plane.png", "plant.png", "sun.png",
+            "watermelon.png", "snow.png", "monster.png"
             };
 
         ImageButton alarmButton1;

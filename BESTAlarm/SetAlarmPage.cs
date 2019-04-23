@@ -20,6 +20,7 @@ namespace BESTAlarm
         TimePicker MyTimePicker;
         Label alarmOnOffLabel;
         ImageButton myImage;
+        Entry myEntry;
 
         int thisIndex;
 
@@ -42,13 +43,16 @@ namespace BESTAlarm
             MyTimePicker.PropertyChanged += MyTimePicker_PropertyChanged;
             MyTimePicker.IsEnabled = !myAlarms.isAlarmButtonOn(thisIndex);
 
-            Label myLabel = new Label
+            myEntry = new Entry
             {
-                Text = "Set the alarm here",
+                Text = myAlarms.getAlarmButtonTitle(thisIndex),
+                TextColor = Color.Black,
                 FontSize = 30,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
             };
+            myEntry.IsEnabled = !myAlarms.isAlarmButtonOn(thisIndex);
+            myEntry.PropertyChanged += MyEntry_PropertyChanged;
 
             myImage = new ImageButton
             {
@@ -78,15 +82,15 @@ namespace BESTAlarm
             alarmOnOffLabel.Text = myAlarms.isAlarmButtonOn(thisIndex) ? "The alarm is now on" : "The alarm is now off";
 
             Grid grid = new Grid();
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(10) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            grid.Children.Add(myImage, 0, 1);
-            grid.Children.Add(myLabel, 0, 2);
+            grid.Children.Add(myEntry, 0, 1);
+            grid.Children.Add(myImage, 0, 2);
             grid.Children.Add(MyTimePicker, 0, 3);
             grid.Children.Add(switcher, 0, 4);
             grid.Children.Add(alarmOnOffLabel, 0, 5);
@@ -98,6 +102,17 @@ namespace BESTAlarm
                 }
             };
         }
+
+        void MyEntry_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Text")
+            {
+                myAlarms.setAlarmButtonTitle(myEntry.Text, thisIndex);
+                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tempFile");
+                myAlarms.SaveToFile(fileName);
+            }
+        }
+
 
         override protected void OnAppearing()
         {
@@ -143,8 +158,9 @@ namespace BESTAlarm
                 BackgroundColor = Color.DarkGreen;
                 myImage.IsEnabled = false;
                 MyTimePicker.IsEnabled = false;
+                myEntry.IsEnabled = false;
 
-                DependencyService.Get<ISetAlarmNotification>().SetAlarm("test notification", myAlarms.GetAlarmButtonTime()[thisIndex].Hours,
+                DependencyService.Get<ISetAlarmNotification>().SetAlarm(myAlarms.getAlarmButtonTitle(thisIndex), myAlarms.GetAlarmButtonTime()[thisIndex].Hours,
                     myAlarms.GetAlarmButtonTime()[thisIndex].Minutes, myAlarms.GetAlarmButtonTime()[thisIndex].Seconds, myAlarms.getAlarmButtonID(thisIndex));
             }
             else // Switch is now off
@@ -158,6 +174,7 @@ namespace BESTAlarm
                 BackgroundColor = Color.Red;
                 myImage.IsEnabled = true;
                 MyTimePicker.IsEnabled = true;
+                myEntry.IsEnabled = true;
 
                 DependencyService.Get<ISetAlarmNotification>().CancelAlarm(myAlarms.getAlarmButtonID(thisIndex));
             }
@@ -171,7 +188,6 @@ namespace BESTAlarm
                 myAlarms.SetAlarmButtonTime(myAlarms.GetAlarmButtonTime()[thisIndex], thisIndex);
                 string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tempFile");
                 myAlarms.SaveToFile(fileName);
-
             }
         }
     }

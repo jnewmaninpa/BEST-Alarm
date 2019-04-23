@@ -98,6 +98,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetAlarmNotification_iOS.cs" />
     <Compile Include="UserNotificationCenterDelegate.cs" />
+    <Compile Include="SetTimerNotification_iOS.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

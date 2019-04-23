@@ -9,6 +9,7 @@ namespace BESTAlarm
         TimeSpan[] alarmButtonTime;
         Boolean[] alarmButtonIsOn;
         string[] alarmButtonID;
+        string[] alarmButtonTitle;
 
         public AlarmInfo()
         {
@@ -17,6 +18,8 @@ namespace BESTAlarm
                 (new TimeSpan(7, 45, 0)), (new TimeSpan(13, 0, 0)), (new TimeSpan(12, 0, 0)), (new TimeSpan(17, 0, 0)), (new TimeSpan(15, 30, 0)) };
             alarmButtonIsOn = new Boolean[9] { false, false, false, false, false, false, false, false, false };
             alarmButtonID = new string[9] { "alarm1", "alarm2", "alarm3", "alarm4", "alarm5", "alarm6", "alarm7", "alarm8", "alarm9" };
+            alarmButtonTitle = new string[9] { "Alarm title here...", "Alarm title here...", "Alarm title here...", "Alarm title here...",
+     "Alarm title here...", "Alarm title here...", "Alarm title here...", "Alarm title here...", "Alarm title here..." };
         }
 
         public AlarmInfo(String fileName)
@@ -25,6 +28,7 @@ namespace BESTAlarm
             alarmButtonTime = new TimeSpan[9];
             alarmButtonIsOn = new Boolean[9];
             alarmButtonID = new string[9];
+            alarmButtonTitle = new string[9];
 
             String fileInfo = File.ReadAllText(fileName);
 
@@ -40,6 +44,7 @@ namespace BESTAlarm
                 alarmButtonTime[i] = new TimeSpan(hours, minutes, seconds);
                 alarmButtonIsOn[i] = Boolean.Parse(info[4]);
                 alarmButtonID[i] = info[5];
+                alarmButtonTitle[i] = info[6];
             }
         }
 
@@ -98,6 +103,16 @@ namespace BESTAlarm
             alarmButtonID[index] = id;
         }
 
+        public string getAlarmButtonTitle(int index)
+        {
+            return alarmButtonTitle[index];
+        }
+
+        public void setAlarmButtonTitle(string title, int index)
+        {
+            alarmButtonTitle[index] = title;
+        }
+
         public void SaveToFile(string fileName)
         {
             String data = "";
@@ -109,7 +124,8 @@ namespace BESTAlarm
                 data += (alarmButtonTime[i].Minutes + ",");
                 data += (alarmButtonTime[i].Seconds + ",");
                 data += (alarmButtonIsOn[i] + ",");
-                data += (alarmButtonID[i] + '\n');
+                data += (alarmButtonID[i] + ',');
+                data += (alarmButtonTitle[i] + '\n');
             }
 
             File.WriteAllText(fileName, data);
